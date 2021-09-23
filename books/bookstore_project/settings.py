@@ -38,13 +38,35 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# django-allauth config
+SITE_ID = 1 # new
+#Read Docs:https://docs.djangoproject.com/en/2.2/ref/contrib/sites/
+# Django’s sites framework is a powerful feature that allows one Django project to
+# control multiple sites. Given we only have one site in our project, we’ll set the SITE_ID
+# to 1. If we added a second site it would have an ID of 2, a third site would have an ID
+# of 3, and so on.
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend', 
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+#sending mails on successfull user registration
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +83,7 @@ ROOT_URLCONF = 'bookstore_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,8 +164,16 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home' # new
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # new
+
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+
 
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
