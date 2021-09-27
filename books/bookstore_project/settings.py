@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -179,3 +179,6 @@ ACCOUNT_UNIQUE_EMAIL = True # new
 
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
+
+#emails
+DEFUALT_FROM_MAIL = 'admin@djangobookstore.com'
