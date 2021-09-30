@@ -182,3 +182,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
 
 #emails
 DEFUALT_FROM_MAIL = 'admin@djangobookstore.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
