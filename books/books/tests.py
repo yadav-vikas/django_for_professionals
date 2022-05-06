@@ -9,7 +9,7 @@ class BookTests(TestCase):
         self.user = get_user_model().objects.create_superuser('reviewuser', 'reviewuser@gmail.om', 'testpass123')
         self.book = Book.objects.create(title='Harry Potter', author='JK Rowling', price='25.00')
         self.review = Review.objects.create(book=self.book, author=self.user, review='a good review')
-        self.special_permission = Permission.objects.get(codename= 'special status')
+        self.special_permission = Permission.objects.get(codename= 'special_status')
 
     def test_book_listing(self):
         self.assertEqual(f'{self.book.title}', 'Harry Potter')
